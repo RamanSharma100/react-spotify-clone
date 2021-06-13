@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import Header from "./Header/Header";
+import HomeScreen from "./HomeScreen";
 import SideBar from "./SideBar/SideBar";
 
 const Home = ({ spotify }) => {
@@ -19,6 +20,9 @@ const Home = ({ spotify }) => {
         >
           {/* header  */}
           <Header />
+
+          {/* homeScreen  */}
+          <HomeScreen />
         </Col>
       </Row>
     </Container>
