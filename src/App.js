@@ -31,6 +31,7 @@ const App = () => {
           dispatch(loginUser(user));
           s.getUserPlaylists().then((playlists) => {
             dispatch(getPlaylists(playlists));
+            s.getMyRecentlyPlayedTracks().then((tracks) => console.log(tracks));
           });
         })
         .catch((err) => {
@@ -51,6 +52,8 @@ const App = () => {
         dispatch(loginUser(user));
         s.getUserPlaylists().then((playlists) => {
           dispatch(getPlaylists(playlists));
+
+          s.getMyRecentlyPlayedTracks().then((tracks) => console.log(tracks));
         });
       });
     }

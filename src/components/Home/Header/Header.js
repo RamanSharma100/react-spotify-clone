@@ -13,22 +13,25 @@ const Header = () => {
       xl={12}
       xs={12}
       sm={12}
-      className="d-flex w-100 px-5 mt-3 align-items-center justify-content-between"
+      className="d-flex w-100 px-5 mt-3 bg-secondary position-sticky top-0 align-items-center justify-content-between"
       style={{ height: "70px" }}
     >
-      <Form className={"col-md-6 rounded-10"}>
+      <Form className={"col-md-6"}>
         <Form.Group controlId={"formBasicSearch"}>
           <InputGroup>
             <InputGroup.Prepend>
-              <InputGroup.Text className="border-0 bg-white rounded-0 w-100 h-100">
+              <InputGroup.Text className="border-0 rounded-0 bg-white w-100 h-100">
                 <FontAwesomeIcon icon={faSearch} />
               </InputGroup.Text>
             </InputGroup.Prepend>
             <Form.Control
               type="text"
               placeholder="Search..."
-              style={{ outline: "none", boxShadow: "none" }}
-              className="border-0"
+              style={{
+                outline: "none",
+                boxShadow: "none",
+              }}
+              className="border-0 rounded-0"
             />
           </InputGroup>
         </Form.Group>

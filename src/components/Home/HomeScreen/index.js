@@ -4,7 +4,7 @@ import PlayListScreen from "./PlayListScreen";
 
 const HomeScreen = () => {
   return (
-    <Col md={12}>
+    <Col md={12} style={{ height: "88.2vh", overflowY: "auto" }}>
       <PlayListScreen />
     </Col>
   );

@@ -1,0 +1,4 @@
+.playlist:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transition: 0.3s background linear;
+}
