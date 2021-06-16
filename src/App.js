@@ -8,7 +8,17 @@ import "./App.css";
 
 import Login from "./components/Login/Login";
 import Home from "./components/Home";
-import { getPlaylists, resetPlaylist } from "./redux/actions/playlistsAction";
+import {
+  getCurrentlyPlayingPlaylist,
+  getPlaylists,
+  resetPlaylist,
+} from "./redux/actions/playlistsAction";
+import {
+  getRecentTracks,
+  setCurrentPlayingTrack,
+  unsetRecentTracks,
+} from "./redux/actions/tracksAction";
+import Footer from "./components/Footer/Footer";
 
 const s = new SpotifyWebApi();
 
@@ -26,12 +36,24 @@ const App = () => {
     if (localStorage.getItem("tokn") && !token) {
       s.setAccessToken(JSON.parse(localStorage.getItem("tokn")).access_token);
       dispatch(tokenSet(JSON.parse(localStorage.getItem("tokn"))));
+
       s.getMe()
         .then((user) => {
           dispatch(loginUser(user));
           s.getUserPlaylists().then((playlists) => {
             dispatch(getPlaylists(playlists));
-            s.getMyRecentlyPlayedTracks().then((tracks) => console.log(tracks));
+            s.getMyRecentlyPlayedTracks().then((tracks) => {
+              dispatch(getRecentTracks(tracks));
+              const recentTrack = tracks.items.filter(
+                (track) => track.track.preview_url
+              )[0];
+              dispatch(setCurrentPlayingTrack(recentTrack));
+              dispatch(
+                getCurrentlyPlayingPlaylist(
+                  tracks.items.filter((track) => track.track.preview_url)
+                )
+              );
+            });
           });
         })
         .catch((err) => {
@@ -39,6 +61,7 @@ const App = () => {
             localStorage.removeItem("tokn");
             dispatch(userReset());
             dispatch(resetPlaylist());
+            dispatch(unsetRecentTracks());
           }
         });
     }
@@ -53,14 +76,34 @@ const App = () => {
         s.getUserPlaylists().then((playlists) => {
           dispatch(getPlaylists(playlists));
 
-          s.getMyRecentlyPlayedTracks().then((tracks) => console.log(tracks));
+          s.getMyRecentlyPlayedTracks().then((tracks) => {
+            dispatch(getRecentTracks(tracks));
+            const recentTrack = tracks.items.filter(
+              (track) => track.track.preview_url
+            )[0];
+            dispatch(setCurrentPlayingTrack(recentTrack));
+            dispatch(
+              getCurrentlyPlayingPlaylist(
+                tracks.items.filter((track) => track.track.preview_url)
+              )
+            );
+          });
         });
       });
     }
   }, [token, dispatch]);
 
   return (
-    <div className="Home">{!token ? <Login /> : <Home spotify={s} />}</div>
+    <div className="Home">
+      {!token ? (
+        <Login />
+      ) : (
+        <>
+          <Home spotify={s} />
+          <Footer spotify={s} />
+        </>
+      )}
+    </div>
   );
 };
 

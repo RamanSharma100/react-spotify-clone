@@ -10,7 +10,7 @@ const setRecentTracks = (data) => ({
   payload: data,
 });
 const resetRecentTracks = () => ({
-  type: types.RESET_RECENT_TRACKS,
+  type: types.RESET_TRACKS,
 });
 
 export const getRecentTracks = (data) => (dispatch) => {
@@ -21,4 +21,22 @@ export const getRecentTracks = (data) => (dispatch) => {
 
 export const unsetRecentTracks = () => (dispatch) => {
   dispatch(resetRecentTracks());
+};
+
+const addCurrentPlayingTrack = (data) => ({
+  type: types.CURRENT_PLAYING_TRACK,
+  payload: data,
+});
+
+export const setCurrentPlayingTrack = (data) => (dispatch) => {
+  dispatch(addCurrentPlayingTrack(data));
+};
+
+const setPlaying = (data) => ({
+  type: types.SET_PLAYING,
+  payload: data,
+});
+
+export const playingTrack = (data) => (dispatch) => {
+  dispatch(setPlaying(data));
 };

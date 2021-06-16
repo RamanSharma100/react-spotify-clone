@@ -13,7 +13,6 @@ const authReducer = (state = initialState, { type, payload }) => {
       return state;
     case types.SET_USER:
       state = { ...state, isLoggedIn: true, user: payload };
-      console.log(payload);
       return state;
     case types.RESET_USER:
       state = initialState;

@@ -11,14 +11,13 @@ const SideBar = () => {
     isLoading: state.playlists.isLoading,
     playlists: state.playlists.playlists,
   }));
-  console.log(playlists);
   return (
     <Col
       xs={1}
       md={2}
       sm={1}
-      className="position-fixed px-0 d-flex flex-column align-items-center sidebar left-0 text-white h-100"
-      style={{ background: "#000" }}
+      className="position-fixed px-0 d-flex flex-column align-items-center sidebar left-0 text-white"
+      style={{ background: "#000", height: "90%" }}
     >
       <Image
         className="logo mt-4 mb-4"

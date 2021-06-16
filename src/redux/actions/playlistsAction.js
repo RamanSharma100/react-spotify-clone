@@ -20,3 +20,11 @@ export const resetPlaylist = () => (dispatch) => {
   dispatch(resetPlaylists());
   dispatch(setLoading(true));
 };
+
+const setCurrentlyPlayingPlaylist = (data) => ({
+  type: types.CURRENTLY_PLAYING,
+  payload: data,
+});
+export const getCurrentlyPlayingPlaylist = (data) => (dispatch) => {
+  dispatch(setCurrentlyPlayingPlaylist(data));
+};

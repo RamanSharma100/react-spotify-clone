@@ -4,6 +4,7 @@ const initialState = {
   isLoading: true,
   recentlyPlayed: null,
   currentlyPlaying: null,
+  playing: false,
 };
 
 const tracksReducer = (state = initialState, { type, payload }) => {
@@ -16,6 +17,12 @@ const tracksReducer = (state = initialState, { type, payload }) => {
       return state;
     case types.RESET_TRACKS:
       state = initialState;
+      return state;
+    case types.CURRENT_PLAYING_TRACK:
+      state = { ...state, currentlyPlaying: payload };
+      return state;
+    case types.SET_PLAYING:
+      state = { ...state, playing: payload };
       return state;
     default:
       return state;
