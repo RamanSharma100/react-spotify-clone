@@ -2,16 +2,25 @@ import { faHome, faMusic, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Button, Col, Image } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { getSelectedPlaylist } from "../../../redux/actions/playlistsAction";
 
 import "./style.css";
 
 const SideBar = ({ setRoot, root }) => {
-  const { isLoading, playlists } = useSelector((state) => ({
-    isLoading: state.playlists.isLoading,
-    playlists: state.playlists.playlists,
-  }));
+  const { isLoading, playlists } = useSelector(
+    (state) => ({
+      isLoading: state.playlists.isLoading,
+      playlists: state.playlists.playlists,
+    }),
+    shallowEqual
+  );
 
+  const dispatch = useDispatch();
+  const openPlaylist = (playlist) => {
+    dispatch(getSelectedPlaylist(playlist));
+    setRoot("album");
+  };
   return (
     <Col
       xs={1}
@@ -61,6 +70,7 @@ const SideBar = ({ setRoot, root }) => {
               key={index}
               style={{ cursor: "pointer" }}
               className="playlistName my-0 px-3 py-1 small w-100"
+              onClick={() => openPlaylist(itm)}
             >
               {itm.name}
             </p>
