@@ -2,14 +2,15 @@ import React from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import Header from "./Header/Header";
 import HomeScreen from "./HomeScreen";
+import PlaylistScreen from "./PlaylistScreen";
 import SideBar from "./SideBar/SideBar";
 
-const Home = ({ spotify }) => {
+const Home = ({ spotify, setRoot, root }) => {
   return (
     <Container fluid className=" mx-0">
       <Row>
         {/* side bar  */}
-        <SideBar />
+        <SideBar setRoot={setRoot} root={root} />
         {/* right bar */}
         <Col
           xs={12}
@@ -19,10 +20,17 @@ const Home = ({ spotify }) => {
           style={{ overflowX: "hidden", overflowY: "auto" }}
         >
           {/* header  */}
-          <Header />
-
+          <Header root={root} setRoot={setRoot} />
           {/* homeScreen  */}
-          <HomeScreen />
+          {root === "home" && <HomeScreen setRoot={setRoot} />}
+          {/* search screen */}
+          {root === "search" && <h1>Search</h1>}
+          {/* {library} */}
+          {root === "library" && <h1>Library</h1>}
+          {/* album */}
+          {root === "album" && (
+            <PlaylistScreen setRoot={setRoot} spotify={spotify} />
+          )}
         </Col>
       </Row>
     </Container>

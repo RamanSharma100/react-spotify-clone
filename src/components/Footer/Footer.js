@@ -5,7 +5,7 @@ import {
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -26,14 +26,6 @@ const Footer = () => {
   const [currentlyPlayingIndex, setCurrentlyPlayingIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (currentlyPlaying && currentlyPlayingPlaylist) {
-      setCurrentlyPlayingIndex(
-        currentlyPlayingPlaylist.indexOf(currentlyPlaying)
-      );
-    }
-  }, [currentlyPlaying]);
 
   const play = () => {
     audioRef.current.play();
@@ -87,15 +79,20 @@ const Footer = () => {
   };
 
   useEffect(() => {
-    if (currentlyPlaying && playing) {
-      play();
+    if (currentlyPlaying && currentlyPlayingPlaylist) {
+      setCurrentlyPlayingIndex(
+        currentlyPlayingPlaylist.indexOf(currentlyPlaying)
+      );
+      if (playing) {
+        play();
+      }
     }
-  }, [audioRef.current?.src]);
+  }, [currentlyPlaying, audioRef.current?.src, dispatch]);
 
   return (
     <Col
       md={12}
-      className="bg-dark position-fixed d-flex align-items-center justify-content-between text-white px-5 py-2 bottom-0"
+      className="bg-dark position-fixed d-flex align-items-center justify-content-between text-white px-5 mx-0 py-2 bottom-0"
       style={{ height: "80px", overflow: "hidden" }}
     >
       {!currentlyPlaying ? (
@@ -113,7 +110,12 @@ const Footer = () => {
               style={{ width: "60px" }}
             />
             <div className="trackInfo text-white w-100">
-              <p className="my-0">{currentlyPlaying.track.name}</p>
+              <p
+                className="my-0 px-3 "
+                style={{ overflow: "hidden", wordWrap: "no-wrap" }}
+              >
+                {currentlyPlaying.track.name}
+              </p>
               <p className="small text-secondary px-3 my-0">
                 {currentlyPlaying.track.album.artists
                   .map((artist) => artist.name)

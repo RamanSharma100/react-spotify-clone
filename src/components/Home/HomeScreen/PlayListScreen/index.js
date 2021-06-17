@@ -1,14 +1,20 @@
 import React from "react";
 import { Image } from "react-bootstrap";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getSelectedPlaylist } from "../../../../redux/actions/playlistsAction";
 import "./style.css";
 
-const PlayListScreen = () => {
+const PlayListScreen = ({ setRoot }) => {
   const { isLoading, playlists } = useSelector((state) => ({
     isLoading: state.playlists.isLoading,
     playlists: state.playlists.playlists,
   }));
+  const dispatch = useDispatch();
+
+  const openPlaylist = (playlist) => {
+    setRoot("album");
+    dispatch(getSelectedPlaylist(playlist));
+  };
 
   if (isLoading) {
     return (
@@ -49,6 +55,7 @@ const PlayListScreen = () => {
               cursor: "pointer",
             }}
             key={index}
+            onClick={() => openPlaylist(itm)}
           >
             <Image
               className="shadow-lg mr-3"

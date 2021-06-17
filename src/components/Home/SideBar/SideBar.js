@@ -6,17 +6,18 @@ import { useSelector } from "react-redux";
 
 import "./style.css";
 
-const SideBar = () => {
+const SideBar = ({ setRoot, root }) => {
   const { isLoading, playlists } = useSelector((state) => ({
     isLoading: state.playlists.isLoading,
     playlists: state.playlists.playlists,
   }));
+
   return (
     <Col
       xs={1}
       md={2}
       sm={1}
-      className="position-fixed px-0 d-flex flex-column align-items-center sidebar left-0 text-white"
+      className="position-fixed px-2 d-flex flex-column align-items-center sidebar left-0 text-white"
       style={{ background: "#000", height: "90%" }}
     >
       <Image
@@ -26,13 +27,28 @@ const SideBar = () => {
         fluid
       />
       <div className="btns w-100 px-3 mb-4 py-3">
-        <Button variant="outline-light" className="my-2 w-100">
+        <Button
+          type="button"
+          onClick={() => setRoot("home")}
+          variant="outline-light"
+          className={`my-2 w-100 ${root === "home" && "active"}`}
+        >
           <FontAwesomeIcon icon={faHome} /> Home
         </Button>
-        <Button variant="outline-light" className="my-2 w-100">
+        <Button
+          type="button"
+          onClick={() => setRoot("search")}
+          variant="outline-light"
+          className={`my-2 w-100 ${root === "search" && "active"}`}
+        >
           <FontAwesomeIcon icon={faSearch} /> Search
         </Button>
-        <Button variant="outline-light" className="my-2 w-100">
+        <Button
+          type="button"
+          onClick={() => setRoot("library")}
+          variant="outline-light"
+          className={`my-2 w-100 ${root === "library" && "active"}`}
+        >
           <FontAwesomeIcon icon={faMusic} /> Library
         </Button>
       </div>

@@ -6,6 +6,7 @@ const initialState = {
   discover_weekly: null,
   top_artists: null,
   currentlyPlaying: null,
+  openedPlaylist: null,
 };
 
 const playlistsReducer = (state = initialState, { type, payload }) => {
@@ -21,6 +22,12 @@ const playlistsReducer = (state = initialState, { type, payload }) => {
       return state;
     case types.CURRENTLY_PLAYING:
       state = { ...state, currentlyPlaying: payload };
+      return state;
+    case types.SET_OPENED_PLAYLIST:
+      state = { ...state, openedPlaylist: payload };
+      return state;
+    case types.RESET_OPENED_PLAYLIST:
+      state = { ...state, openedPlaylist: null };
       return state;
     default:
       return state;

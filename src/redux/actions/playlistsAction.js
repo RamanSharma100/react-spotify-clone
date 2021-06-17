@@ -28,3 +28,18 @@ const setCurrentlyPlayingPlaylist = (data) => ({
 export const getCurrentlyPlayingPlaylist = (data) => (dispatch) => {
   dispatch(setCurrentlyPlayingPlaylist(data));
 };
+
+const setSelectedPlaylist = (data) => ({
+  type: types.SET_OPENED_PLAYLIST,
+  payload: data,
+});
+
+export const resetSelectedPlaylist = () => (dispatch) => {
+  dispatch({
+    type: types.RESET_OPENED_PLAYLIST,
+  });
+};
+
+export const getSelectedPlaylist = (data) => (dispatch) => {
+  dispatch(setSelectedPlaylist(data));
+};

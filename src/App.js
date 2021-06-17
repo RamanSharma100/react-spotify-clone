@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getTokenFromResponse } from "./spotify";
 import { useDispatch, useSelector } from "react-redux";
 import SpotifyWebApi from "spotify-web-api-js";
@@ -93,13 +93,14 @@ const App = () => {
     }
   }, [token, dispatch]);
 
+  const [root, setRoot] = useState("home");
   return (
     <div className="Home">
       {!token ? (
         <Login />
       ) : (
         <>
-          <Home spotify={s} />
+          <Home spotify={s} setRoot={setRoot} root={root} />
           <Footer spotify={s} />
         </>
       )}
