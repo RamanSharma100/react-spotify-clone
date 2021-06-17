@@ -6,7 +6,7 @@ const clientId = "64454223aeec4806a131bb734b98291e";
 const redirectUri =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000/"
-    : window.location.pathname;
+    : window.location.href;
 const scopes = [
   "user-read-currently-playing",
   "user-read-recently-played",
