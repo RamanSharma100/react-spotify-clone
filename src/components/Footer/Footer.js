@@ -180,6 +180,7 @@ const Footer = () => {
             <a
               href={currentlyPlaying.track.external_urls.spotify}
               target="_blank"
+              rel="noreferrer"
               className="btn btn-success ml-3 btn-sm"
             >
               Listen Full Song On Spotify

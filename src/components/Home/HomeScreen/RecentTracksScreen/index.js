@@ -59,7 +59,7 @@ const RecentTracksScreen = () => {
               <h1>No Preview Availaible</h1>
               <a
                 href={track.track.preview_url}
-                rel="noreferer"
+                rel="noreferrer"
                 target="_blank"
                 className="btn btn-success"
               >

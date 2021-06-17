@@ -141,6 +141,7 @@ const PlaylistScreen = ({ setRoot, spotify }) => {
                 <a
                   href={itm.track.external_urls.spotify}
                   target="_blank"
+                  rel="noreferrer"
                   className="my-0 btn-success btn-sm btn ml-2 text-white"
                 >
                   Listen On Spotify
